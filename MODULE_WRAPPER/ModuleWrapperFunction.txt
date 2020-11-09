@@ -1,0 +1,5 @@
+1.ModuleWRapper Functions in node are exactly the same as IIFE in js:
+    ::IIFE::IMMEDIATELY INVOKED FUNCTION EXPRESSIONS
+    ::they have all the prerequisites like :require,module.exports defined in them
+    ::so basically node have these wrapper func which are IIFE and hence we need not to call them...
+    ::so anything declared inside these IIFE ModuleWRapper are protected!!

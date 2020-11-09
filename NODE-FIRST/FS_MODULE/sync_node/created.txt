@@ -1,0 +1,3 @@
+created with fs.writeFilesync_overwriting
+ appending this new line to my existing file
+😃

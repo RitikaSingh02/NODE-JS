@@ -1,0 +1,51 @@
+1.NODE.JS is the javascript runntime environment.
+    :the first point is that js is a client side lang understood by browser directly it cant be run 
+        outside the browser and run on our servers.
+    :so c++ and  google V8 engine(an JS engine used by google that converts our js code to machine code) was embedded to result node.js
+    :so node.js creates a JS runtime environment so JS can be run on our servers.
+    ::IT IS NEITHER A LANGUAGE NOT A FRAMEWORK::
+    ::::A popular node.js based environment is EXPRESS.JS::::
+2.NODE.JS is non blocking as in:
+    :if a request is sent to the server ans lets say the response is to be generted in 4s
+        so if we again request node.js within that 4s then also the request is accepted,
+        in short u do not have to wait for the response hence multiple requests can be made.
+    :therefore it has an asynchronous architecture
+
+3.Its SINGLY THREADED LOOP MODEL:
+    :FIRSTLY WHAT IS MULTI THREADED  REQUEST RESPONSE MODEL:
+        If “no of requests” is greater than “the max no of threads offered by a websevre” (Most of the times, its true), 
+        then server assigns Threads to Client Requests up to available Threads.
+        After all m Threads are utilized,then remaining Client’s Request should wait in 
+        the Queue until some of the busy Threads finish their Request-Processing Job 
+        and free to pick up next Request.
+
+        If those threads are busy with Blocking IO Tasks (synchronous architecture)
+        {When the other task is blocked, it is unable to execute until the
+         first task has finished using the shared resource.}(For example, interacting with Database, file system, JMS Queue, external services etc.)
+        for longer time, then remaining clients should wait longer time.
+
+        Once Threads are free in Thread Pool and available for next tasks, Server pickup those threads and assign them to remaining Client Requests.
+        Each Thread utilizes many resources like memory etc.
+        So before going those Threads from busy state to waiting state,
+        they should release all acquired resources.
+    :THE “Event Loop” model:
+        node maintains a single thread to handle our requests and it maintains an
+        EVENT Queue for all the responses of our requests so what it does it takes all the
+        requests without a pause and places the result of that request in a Queue and and this Queue
+        is on a regular check so whenever a reponse is generated that thred send that to the client.
+
+        :::THE ABOVE MENTIONED PROCESSING IS FOR ALL THE REQUESTS WHICH ARE NOT BLOCKED!!!::: 
+
+        ::FOR BLOCKED I/O operations:
+            Checks Threads availability from Internal Thread Pool
+            Picks up one Thread and assign this Client Request to that thread.
+            That Thread is responsible for taking that request, process it, perform Blocking IO operations, prepare response and send it back to the Event Loop
+            Event Loop in turn, sends that Response to the respective Client.
+
+    https://www.journaldev.com/7462/node-js-architecture-single-threaded-event-loop
+    https://www.youtube.com/watch?v=jOupHNvDIq8&ab_channel=ProgrammingwithMosh
+
+4.WE SHOULD NOT USE NODE FOR CPU INTENSIVE TASKS!!!:
+    ::As on a single thread a lot of pressure is given..
+
+
